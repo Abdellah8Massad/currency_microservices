@@ -1,0 +1,54 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CurrencyExchangeServiceApplication<currency-exchange-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.currency.microservices.currency_exchange_service.CurrencyExchangeServiceApplication",
+            "projectName": "currency-exchange-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CurrencyExchangeServiceApplication<currency-exchange-service>2",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.currency.microservices.currency_exchange_service.CurrencyExchangeServiceApplication",
+            "projectName": "currency-exchange-service",
+            "args": "--server.port=8001",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CurrencyConversionServiceApplication<currency-conversion-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.currency.microservices.currency_conversion_service.CurrencyConversionServiceApplication",
+            "projectName": "currency-conversion-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-NamingServerApplication<naming-server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.eureka.microservices.naming_server.NamingServerApplication",
+            "projectName": "naming-server",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiGatewayApplication<api-gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.gateway.microservices.api_gateway.ApiGatewayApplication",
+            "projectName": "api-gateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
