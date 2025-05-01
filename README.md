@@ -1,6 +1,38 @@
 # Resilience4j Examples with Spring Boot
 
-This project demonstrates the use of **Resilience4j** features in a Spring Boot application. Resilience4j provides fault-tolerance mechanisms such as Circuit Breaker, Retry, Rate Limiter, Bulkhead, and Time Limiter to make applications more resilient and robust.
+## Microservices with Eureka and Load Balancing
+
+This project demonstrates a microservice architecture using the following components:
+
+1. **naming-server**: Acts as the Eureka server for service discovery.
+2. **currency-exchange**: A microservice that provides currency exchange rates.
+3. **currency-conversion**: A microservice that calculates currency conversions by calling the `currency-exchange` service.
+4. **api-gateway**: A gateway that routes requests to the appropriate microservices and provides load balancing.
+
+### Key Concepts:
+1. **Service Discovery**: Microservices (`currency-exchange` and `currency-conversion`) register themselves with the `naming-server`. The `api-gateway` dynamically discovers these services.
+2. **Load Balancing**: The `api-gateway` uses Eureka to distribute requests across multiple instances of a service.
+3. **Fault Tolerance**: Resilience4j is integrated into the microservices to handle failures gracefully.
+
+### Workflow:
+1. **Service Registration**: 
+   - `currency-exchange` and `currency-conversion` register with the `naming-server`.
+   - The `api-gateway` queries the `naming-server` to discover available services.
+2. **Request Flow**:
+   - A client sends a request to the `api-gateway`.
+   - The `api-gateway` routes the request to the appropriate service (e.g., `currency-conversion`).
+   - If `currency-conversion` needs exchange rates, it calls the `currency-exchange` service.
+3. **Load Balancing**:
+   - If multiple instances of `currency-exchange` or `currency-conversion` are running, the `api-gateway` distributes requests among them.
+
+### Example:
+- A client requests a currency conversion via the `api-gateway`:
+  ```bash
+  curl http://localhost:8000/currency-conversion/from/USD/to/INR/quantity/100
+  ```
+- The `api-gateway` routes the request to the `currency-conversion` service.
+- The `currency-conversion` service calls the `currency-exchange` service to get the exchange rate.
+- The response is returned to the client via the `api-gateway`.
 
 ---
 
