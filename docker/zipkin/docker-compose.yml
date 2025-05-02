@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411" # Exposes Zipkin's web interface and API
+    environment:
+      - STORAGE_TYPE=mem # Use in-memory storage (default)

@@ -1,5 +1,7 @@
 package com.currency.microservices.currency_exchange_service.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,8 @@ import com.currency.microservices.currency_exchange_service.repository.CurrencyE
 
 @RestController
 public class CurrencyExchangeController {
+
+    private Logger logger = LoggerFactory.getLogger(CurrencyExchangeController.class);
 
     @Value("${server.port}")
     private String serverPort;
@@ -24,7 +28,9 @@ public class CurrencyExchangeController {
 
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
     public CurrencyExchange getExchangeValue(@PathVariable String from, @PathVariable String to) {
-        // Mock response for demonstration
+
+        logger.info("getExchangeValue called with from: {} to: {}", from, to);
+
         CurrencyExchange currencyExchange = currencyExchangeRepository.findByFromAndTo(from, to);
         if (currencyExchange == null) {
             throw new RuntimeException("Unable to find data for " + from + " to " + to);

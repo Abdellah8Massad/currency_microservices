@@ -19,6 +19,9 @@ public class ConversionController {
         @Autowired
         private CurrencyExchangeProxy proxy;
 
+        @Autowired
+        private RestTemplate restTemplate;
+
         @Value("${server.port}")
         private String serverPort;
 
@@ -28,15 +31,13 @@ public class ConversionController {
                         @PathVariable String to,
                         @PathVariable double quantity) {
 
-                // Mock response for demonstration
-                double conversionMultiple = 65.00;
-                double totalCalculatedAmount = quantity * conversionMultiple;
-
                 HashMap<String, String> uriVariables = new HashMap<>();
                 uriVariables.put("from", from);
                 uriVariables.put("to", to);
 
-                ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity(
+                // ResponseEntity<CurrencyConversion> responseEntity = new
+                // RestTemplate().getForEntity(
+                ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
                                 "http://localhost:8000/currency-exchange/from/{from}/to/{to}",
                                 CurrencyConversion.class, uriVariables);
 
