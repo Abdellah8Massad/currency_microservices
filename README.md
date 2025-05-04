@@ -196,3 +196,62 @@ For example:
 ```bash
 watch -n 1 curl http://localhost:8000/circuit-breaker
 ```
+
+---
+
+## Running the Application with Docker
+
+### Step 1: Generate the Docker Image
+To create a Docker image for the Spring application, follow these steps:
+1. Ensure Docker is installed and running on your machine.
+2. Build the Docker image using Maven:
+   ```bash
+   mvn spring-boot:build-image -DskipTests
+   ```
+   This command will generate a Docker image for the application using the Spring Boot plugin.
+
+### Step 2: Run the Application with Docker Compose
+To run the application and its dependencies using Docker Compose:
+1. Ensure `docker-compose.yml` is properly configured in the project directory.
+2. Start the services using Docker Compose:
+   ```bash
+   docker-compose up
+   ```
+3. To run the services in detached mode, use:
+   ```bash
+   docker-compose up -d
+   ```
+
+### Step 3: Verify the Application
+Once the services are running, you can verify the application:
+- Access the application at `http://localhost:<port>` (replace `<port>` with the configured port in `docker-compose.yml`).
+- Check the logs using:
+   ```bash
+   docker-compose logs
+   ```
+
+### Step 4: Stop the Services
+To stop the running services, use:
+```bash
+docker-compose down
+```
+
+---
+
+## Service Mapping in `application.properties`
+
+The `application.properties` file is used to configure the mapping between services. Below is an example of how services are mapped:
+
+```properties
+# Service URLs
+currency-exchange-service.url=http://currency-exchange:8000
+currency-conversion-service.url=http://currency-conversion:8100
+api-gateway-service.url=http://api-gateway:8765
+```
+
+### Explanation:
+1. **currency-exchange-service.url**: Maps to the `currency-exchange` service running on port `8000`.
+2. **currency-conversion-service.url**: Maps to the `currency-conversion` service running on port `8100`.
+3. **api-gateway-service.url**: Maps to the `api-gateway` service running on port `8765`.
+
+These mappings allow the services to communicate with each other using their respective URLs. Ensure that the service names match the ones defined in `docker-compose.yml`.
