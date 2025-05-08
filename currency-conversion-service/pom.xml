@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>com.currency.microservices</groupId>
 	<artifactId>currency-conversion-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>currency-conversion-service</name>
+	<version>0.0.13-SNAPSHOT</version>
+	<name>currency-conversion-service-k8s</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -39,18 +39,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- Micrometer - Vendor-neutral application observability facade. 
 			Instrument your JVM-based application code without vendor lock-in.  
 			Observation (Metrics & Logs) + Tracing.
@@ -66,10 +66,10 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-otel</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-exporter-zipkin</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- Enables tracing of REST API calls made using Feign - V3 ONLY-->
 		<dependency>
 			<groupId>io.github.openfeign</groupId>
@@ -108,7 +108,7 @@
 				<!-- informations used when you generate docker image -->
 				<configuration>
 					<image>
-						<name>currency-microservices/mmv2-${project.artifactId}:${project.version}</name>
+						<name>currency-microservices/mmv3-${project.artifactId}:${project.version}</name>
 					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>

@@ -2,6 +2,8 @@ package com.currency.microservices.currency_conversion_service.controller;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import com.currency.microservices.currency_conversion_service.proxy.CurrencyExch
 @RestController
 public class ConversionController {
 
+        private Logger logger = LoggerFactory.getLogger(ConversionController.class);
+
         @Autowired
         private CurrencyExchangeProxy proxy;
 
@@ -25,11 +29,17 @@ public class ConversionController {
         @Value("${server.port}")
         private String serverPort;
 
+        @Value("${CURRENCY_EXCHANGE_URI:http://localhost}")
+        private String currencyExchangeUri;
+
         @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
         public CurrencyConversion calculateCurrencyConversion(
                         @PathVariable String from,
                         @PathVariable String to,
                         @PathVariable double quantity) {
+
+                // CHANGE-KUBERNETES
+                logger.info("calculateCurrencyConversion called with {} to {} with {}", from, to, quantity);
 
                 HashMap<String, String> uriVariables = new HashMap<>();
                 uriVariables.put("from", from);
@@ -38,7 +48,7 @@ public class ConversionController {
                 // ResponseEntity<CurrencyConversion> responseEntity = new
                 // RestTemplate().getForEntity(
                 ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
-                                "http://localhost:8000/currency-exchange/from/{from}/to/{to}",
+                                currencyExchangeUri + ":8000/currency-exchange/from/{from}/to/{to}",
                                 CurrencyConversion.class, uriVariables);
 
                 CurrencyConversion conversion = responseEntity.getBody();
@@ -58,6 +68,9 @@ public class ConversionController {
                         @PathVariable String from,
                         @PathVariable String to,
                         @PathVariable double quantity) {
+
+                // CHANGE-KUBERNETES
+                logger.info("calculateCurrencyConversionFeign called with {} to {} with {}", from, to, quantity);
 
                 CurrencyConversion conversion = proxy.getExchangeValue(from, to);
 
