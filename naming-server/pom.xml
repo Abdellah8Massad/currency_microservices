@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.eureka.microservices</groupId>
 	<artifactId>naming-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.3-SNAPSHOT</version>
 	<name>naming-server</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -43,7 +43,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -76,7 +76,7 @@
 				<!-- informations used when you generate docker image -->
 				<configuration>
 					<image>
-						<name>currency-microservices/mmv2-${project.artifactId}:${project.version}</name>
+						<name>currency-microservices/k8s-${project.artifactId}:${project.version}</name>
 					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>

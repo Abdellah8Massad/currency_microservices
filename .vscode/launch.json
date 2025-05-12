@@ -49,6 +49,26 @@
             "projectName": "api-gateway",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringCloudServerApplication<spring-cloud-server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.microservices.spring_cloud_server.SpringCloudServerApplication",
+            "projectName": "spring-cloud-server",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ListPropertiesCloudApplication<list-properties-cloud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.list.properties.list_properties_cloud.ListPropertiesCloudApplication",
+            "projectName": "list-properties-cloud",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

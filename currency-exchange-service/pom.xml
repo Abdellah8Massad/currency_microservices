@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.currency.microservices</groupId>
 	<artifactId>currency-exchange-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.5-SNAPSHOT</version>
 	<name>currency-exchange-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -81,6 +81,7 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-otel</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-exporter-zipkin</artifactId>
@@ -97,6 +98,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -118,7 +120,7 @@
 				<!-- informations used when you generate docker image -->
 				<configuration>
 					<image>
-						<name>currency-microservices/mmv2-${project.artifactId}:${project.version}</name>
+						<name>currency-microservices/k8s-${project.artifactId}:${project.version}</name>
 					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.currency.microservices</groupId>
 	<artifactId>currency-conversion-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.9-SNAPSHOT</version>
 	<name>currency-conversion-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -42,6 +42,15 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -108,7 +117,7 @@
 				<!-- informations used when you generate docker image -->
 				<configuration>
 					<image>
-						<name>currency-microservices/mmv2-${project.artifactId}:${project.version}</name>
+						<name>currency-microservices/k8s-${project.artifactId}:${project.version}</name>
 					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>

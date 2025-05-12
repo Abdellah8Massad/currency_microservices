@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gateway.microservices</groupId>
 	<artifactId>api-gateway</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>api-gateway</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -64,7 +64,10 @@
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-exporter-zipkin</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -102,7 +105,7 @@
 				<!-- informations used when you generate docker image -->
 				<configuration>
 					<image>
-						<name>currency-microservices/mmv2-${project.artifactId}:${project.version}</name>
+						<name>currency-microservices/k8s-${project.artifactId}:${project.version}</name>
 					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>
