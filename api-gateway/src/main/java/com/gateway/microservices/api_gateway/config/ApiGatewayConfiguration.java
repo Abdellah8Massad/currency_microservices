@@ -19,7 +19,7 @@ public class ApiGatewayConfiguration {
                                 .route("currency-exchange", r -> r.path("/currency-exchange/**")
                                                 .uri("lb://currency-exchange"))
                                 .route("currency-conversion", r -> r.path("/currency-conversion/**")
-                                                .uri("lb://currency-conversion"))
+                                                .uri("lb://list-properties-cloud"))
                                 .route("currency-conversion-feign", r -> r.path("/currency-conversion-feign/**")
                                                 .uri("lb://currency-conversion"))
                                 .route("currency-conversion-new", r -> r.path("/currency-conversion-new/**")
