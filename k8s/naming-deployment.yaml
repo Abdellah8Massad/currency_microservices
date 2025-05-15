@@ -23,7 +23,7 @@ spec:
         app: naming-server
     spec:
       containers:
-        - image: currency-microservices/k8s-naming-server:0.1.3-SNAPSHOT
+        - image: currency-microservices/k8s-naming-server:0.2.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-naming-server
           envFrom:
@@ -59,6 +59,7 @@ data:
   API_GETWAY_URI: http://api-gateway
   EUREKA_URI: http://naming-server
   SPRING_CLOUD_URI: http://spring-cloud
+  LOKI_URI: http://loki:3100
 kind: ConfigMap
 metadata:
   name: naming-server

@@ -23,12 +23,14 @@ spec:
         app: spring-cloud
     spec:
       containers:
-        - image: currency-microservices/k8s-spring-cloud-server:0.1.6-SNAPSHOT
+        - image: currency-microservices/k8s-spring-cloud-server:0.2.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-spring-cloud-server
           env:
             - name: ZIPKIN_URI
               value: http://zipkin-server
+            - name: LOKI_URI
+              value: http://loki:3100
           volumeMounts:
             - name: config-volume
               mountPath: /configs

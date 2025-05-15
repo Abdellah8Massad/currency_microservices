@@ -5,6 +5,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,51 +18,58 @@ import com.list.properties.list_properties_cloud.model.PropConfig;
 @RestController
 public class PropertiesController {
 
-    @Autowired
-    private Configuration configuration;
+        @Autowired
+        private Configuration configuration;
 
-    @Autowired
-    private RestTemplate restTemplate;
+        @Autowired
+        private RestTemplate restTemplate;
 
-    private PropConfig propConfig;
+        private PropConfig propConfig;
 
-    @GetMapping("/properties")
-    public PropConfig getProperties() {
-        propConfig = new PropConfig(
-                configuration.getEnvProfil(),
-                configuration.getUriConversion(),
-                configuration.getUriExchange(),
-                configuration.getUriApiGetway(),
-                configuration.getUriSpringCloud());
-        return propConfig;
-    }
+        private Logger logger = org.slf4j.LoggerFactory.getLogger(PropertiesController.class);
 
-    @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
-    public CurrencyConversion calculateCurrencyConversion(
-            @PathVariable String from,
-            @PathVariable String to,
-            @PathVariable double quantity) {
+        @GetMapping("/properties")
+        public PropConfig getProperties() {
+                propConfig = new PropConfig(
+                                configuration.getEnvProfil(),
+                                configuration.getUriConversion(),
+                                configuration.getUriExchange(),
+                                configuration.getUriApiGetway(),
+                                configuration.getUriSpringCloud());
+                logger.info("Properties: " + propConfig);
+                return propConfig;
+        }
 
-        HashMap<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("from", from);
-        uriVariables.put("to", to);
+        @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
+        public CurrencyConversion calculateCurrencyConversion(
+                        @PathVariable String from,
+                        @PathVariable String to,
+                        @PathVariable double quantity) {
 
-        // ResponseEntity<CurrencyConversion> responseEntity = new
-        // RestTemplate().getForEntity(
-        ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
-                configuration.getUriExchange() + ":8000/currency-exchange/from/{from}/to/{to}",
-                CurrencyConversion.class, uriVariables);
+                HashMap<String, String> uriVariables = new HashMap<>();
+                uriVariables.put("from", from);
+                uriVariables.put("to", to);
 
-        CurrencyConversion conversion = responseEntity.getBody();
+                logger.info("PropertiesController.class - calculateCurrencyConversion");
+                // ResponseEntity<CurrencyConversion> responseEntity = new
+                // RestTemplate().getForEntity(
+                ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
+                                configuration.getUriExchange() + ":8000/currency-exchange/from/{from}/to/{to}",
+                                CurrencyConversion.class, uriVariables);
 
-        return new CurrencyConversion(
-                conversion.getId(),
-                from,
-                to,
-                conversion.getConversionMultiple(),
-                quantity,
-                conversion.getConversionMultiple() * quantity,
-                conversion.getEnvironment());
-    }
+                CurrencyConversion conversion = responseEntity.getBody();
+
+                logger.info("PropertiesController.class - calculateCurrencyConversion - conversion: "
+                                + conversion);
+
+                return new CurrencyConversion(
+                                conversion.getId(),
+                                from,
+                                to,
+                                conversion.getConversionMultiple(),
+                                quantity,
+                                conversion.getConversionMultiple() * quantity,
+                                conversion.getEnvironment());
+        }
 
 }

@@ -1,3 +1,4 @@
+I use k8s with minikube
 I use springboot 3.4.5 for all my projects with JDK 24
 I run my projects in kubernetes
 spring_cloud is my spring cloud config used by currency-exchange-service and currency-conversion-service

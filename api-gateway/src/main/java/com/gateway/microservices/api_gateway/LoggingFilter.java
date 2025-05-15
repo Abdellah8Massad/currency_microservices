@@ -20,7 +20,7 @@ public class LoggingFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        System.out.println("Logging Filter: request id -> " + exchange.getRequest().getId());
+        logger.info("Logging Filter: request id -> " + exchange.getRequest().getId());
 
         logger.info("-------------------------------------------------");
         logger.info("Env Profil: " + configuration.getEnvProfil());

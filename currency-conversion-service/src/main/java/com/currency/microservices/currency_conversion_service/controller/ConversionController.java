@@ -78,7 +78,13 @@ public class ConversionController {
                         @PathVariable String to,
                         @PathVariable double quantity) {
 
+                logger.info("configuration conversion exchange all url : " + configuration.getUriExchange()
+                                + ":8000/currency-exchange/from/{from}/to/{to}");
+
                 CurrencyConversion conversion = proxy.getExchangeValue(from, to);
+
+                logger.info("configuration conversion exchange all url : " + conversion.getId()
+                                + ":8000/currency-exchange/from/{from}/to/{to}");
 
                 return new CurrencyConversion(
                                 conversion.getId(),
