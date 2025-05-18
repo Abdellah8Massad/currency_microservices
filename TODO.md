@@ -1,0 +1,4 @@
+- cache
+- event driven (streaming)
+- batching
+- ajout CI/CD

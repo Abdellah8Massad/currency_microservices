@@ -22,6 +22,17 @@ spec:
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: "admin"
+            - name: GF_INSTALL_PLUGINS
+              value: "grafana-piechart-panel,grafana-clock-panel"
+            - name: GF_PATHS_PROVISIONING
+              value: "/etc/grafana/provisioning"
+          volumeMounts:
+            - name: grafana-datasources
+              mountPath: /etc/grafana/provisioning/datasources
+      volumes:
+        - name: grafana-datasources
+          configMap:
+            name: grafana-datasources
 ---
 apiVersion: v1
 kind: Service
@@ -54,3 +65,23 @@ spec:
                 name: grafana
                 port:
                   number: 3000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+data:
+  loki-prometheus-datasources.yaml: |
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus:9090
+        isDefault: true
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki:3100
+        jsonData:
+          maxLines: 1000
