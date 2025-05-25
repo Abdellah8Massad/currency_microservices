@@ -19,9 +19,7 @@
                 <readMarkers>true</readMarkers>
             </label>
             <message>
-                <pattern>
-                    %d{yyyy-MM-dd HH:mm:ss} [%thread] %magenta(%-5level) %green([%-50.50class]) >>> %cyan(%msg) %n
-                </pattern>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}/%X{spanId}] %-5level %logger{36} - %msg%n</pattern>
             </message>
         </format>
     </appender>
