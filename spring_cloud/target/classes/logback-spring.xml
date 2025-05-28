@@ -15,13 +15,11 @@
         </http>
         <format>
             <label>
-                <pattern>app=spring-cloud environment=production, region=eu-west-1, level=%level</pattern>
+                <pattern>app=currency-exchange, environment=production, region=eu-west-1, level=%level</pattern>
                 <readMarkers>true</readMarkers>
             </label>
             <message>
-                <pattern>
-                    %d{yyyy-MM-dd HH:mm:ss} [%thread] %magenta(%-5level) %green([%-50.50class]) >>> %cyan(%msg) %n
-                </pattern>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}/%X{spanId}] %-5level %logger{36} - %msg%n</pattern>
             </message>
         </format>
     </appender>

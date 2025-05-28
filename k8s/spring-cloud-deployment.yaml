@@ -31,6 +31,8 @@ spec:
               value: http://zipkin-server
             - name: LOKI_URI
               value: http://loki:3100
+            - name: TEMPO_URI
+              value: http://tempo:4318/v1/traces
           volumeMounts:
             - name: config-volume
               mountPath: /configs
