@@ -29,6 +29,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: api-gateway
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
           readinessProbe:
             httpGet:
               port: 8765
@@ -67,6 +74,7 @@ data:
   ZIPKIN_URI: http://zipkin-server
   LOKI_URI: http://loki:3100
   TEMPO_URI: http://tempo:4318/v1/traces
+  KEYCLOAK_URI: http://keycloak:8080
 kind: ConfigMap
 metadata:
   name: api-gateway
