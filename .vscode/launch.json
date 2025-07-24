@@ -77,6 +77,16 @@
             "projectName": "list-properties-cloud",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MessageApplication<message>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.message.message.MessageApplication",
+            "projectName": "message",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

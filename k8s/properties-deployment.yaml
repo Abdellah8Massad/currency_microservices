@@ -23,7 +23,7 @@ spec:
         app: list-properties
     spec:
       containers:
-        - image: currency-microservices/k8s-list-properties-cloud:0.2.0-SNAPSHOT
+        - image: currency-microservices/k8s-list-properties-cloud:0.2.10-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-list-properties-service
           envFrom:
@@ -32,10 +32,10 @@ spec:
           resources:
             requests:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "500m"
             limits:
               memory: "1Gi"
-              cpu: "500m"
+              cpu: "1000m"
           readinessProbe:
             httpGet:
               port: 8200
@@ -74,6 +74,10 @@ data:
   ZIPKIN_URI: http://zipkin-server
   LOKI_URI: http://loki:3100
   TEMPO_URI: http://tempo:4318/v1/traces
+  RABBIT_HOST: rabbitmq
+  RABBIT_PORT: "5672"
+  RABBIT_USERNAME: guest
+  RABBIT_PASSWORD: guest
 kind: ConfigMap
 metadata:
   name: list-properties

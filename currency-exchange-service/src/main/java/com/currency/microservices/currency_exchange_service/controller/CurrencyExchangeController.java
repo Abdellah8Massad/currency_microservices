@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,10 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.currency.microservices.currency_exchange_service.model.CurrencyExchange;
 import com.currency.microservices.currency_exchange_service.repository.CurrencyExchangeRepository;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
-
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class CurrencyExchangeController {
@@ -28,6 +26,9 @@ public class CurrencyExchangeController {
     @Autowired
     private CurrencyExchangeRepository currencyExchangeRepository;
 
+    @Autowired
+    private RabbitMQProducer rabbitMQProducer;
+
     public CurrencyExchangeController(CurrencyExchangeRepository currencyExchangeRepository) {
         this.currencyExchangeRepository = currencyExchangeRepository;
     }
@@ -36,7 +37,7 @@ public class CurrencyExchangeController {
     public CurrencyExchange getExchangeValue(@PathVariable String from, @PathVariable String to) {
 
         logger.info("getExchangeValue called with from: {} to: {}", from, to);
-
+        sendNotification("Streaming with rabbitMQ Exchange request from " + from + " to " + to);
         CurrencyExchange currencyExchange = currencyExchangeRepository.findByFromAndTo(from, to);
         if (currencyExchange == null) {
             throw new RuntimeException("Unable to find data for " + from + " to " + to);
@@ -48,10 +49,16 @@ public class CurrencyExchangeController {
     @PostMapping("/currency-exchange/from/{from}/to/{to}/conversion-multiple/{conversionMultiple}")
     public ResponseEntity<String> postMethodName(@PathVariable Double conversionMultiple, @PathVariable String from,
             @PathVariable String to) {
+        sendNotification("Streaming with rabbitMQ Update conversion multiple from " + from + " to " + to);
         CurrencyExchange currencyExchange = currencyExchangeRepository.findByFromAndTo(from, to);
         currencyExchange.setConversionMultiple(conversionMultiple);
         currencyExchangeRepository.save(currencyExchange);
         return ResponseEntity.ok("Conversion multiple updated successfully for " + from + " to " + to);
+    }
+
+    private void sendNotification(String message) {
+        rabbitMQProducer.sendMessage("currency-exchange", "routing-key", message);
+        logger.info("Message sent to currency-out-0: {}", message);
     }
 
 }

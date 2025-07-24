@@ -23,3 +23,5 @@ tempo:4317/4318/3200
 minio:9000/9001
 grafana:3000
 keycloak:8080 (admin/admin)
+
+https://www.geeksforgeeks.org/springboot/spring-boot-rabbitmq-configuration/
