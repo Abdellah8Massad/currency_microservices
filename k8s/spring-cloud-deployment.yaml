@@ -23,7 +23,7 @@ spec:
         app: spring-cloud
     spec:
       containers:
-        - image: currency-microservices/k8s-spring-cloud-server:0.2.0-SNAPSHOT
+        - image: currency-microservices/k8s-spring-cloud-server:0.3.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-spring-cloud-server
           env:

@@ -23,7 +23,7 @@ spec:
         app: naming-server
     spec:
       containers:
-        - image: currency-microservices/k8s-naming-server:0.2.0-SNAPSHOT
+        - image: currency-microservices/k8s-naming-server:0.3.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-naming-server
           envFrom:

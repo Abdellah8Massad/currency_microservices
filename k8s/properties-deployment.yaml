@@ -23,7 +23,7 @@ spec:
         app: list-properties
     spec:
       containers:
-        - image: currency-microservices/k8s-list-properties-cloud:0.2.10-SNAPSHOT
+        - image: currency-microservices/k8s-list-properties-cloud:0.3.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-list-properties-service
           envFrom:

@@ -23,7 +23,7 @@ spec:
         app: currency-exchange
     spec:
       containers:
-        - image: currency-microservices/k8s-currency-exchange-service:0.2.7-SNAPSHOT
+        - image: currency-microservices/k8s-currency-exchange-service:0.3.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-currency-exchange-service
           envFrom:

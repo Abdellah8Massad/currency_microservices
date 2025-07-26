@@ -23,7 +23,7 @@ spec:
         app: api-gateway
     spec:
       containers:
-        - image: currency-microservices/k8s-api-gateway:0.2.0-SNAPSHOT
+        - image: currency-microservices/k8s-api-gateway:0.3.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: k8s-api-gateway-server
           envFrom:
