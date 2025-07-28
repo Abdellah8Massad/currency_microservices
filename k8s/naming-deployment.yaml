@@ -36,9 +36,6 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "500m"
-          # env:
-          #   - name: CURRENCY_EXCHANGE_URI
-          #     value: http://currency-exchange
       restartPolicy: Always
 ---
 apiVersion: v1

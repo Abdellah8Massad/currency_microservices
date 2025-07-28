@@ -32,10 +32,10 @@ spec:
           resources:
             requests:
               memory: "512Mi"
-              cpu: "500m"
+              cpu: "250m"
             limits:
               memory: "1Gi"
-              cpu: "1000m"
+              cpu: "500m"
           readinessProbe:
             httpGet:
               port: 8200
@@ -78,6 +78,7 @@ data:
   RABBIT_PORT: "5672"
   RABBIT_USERNAME: guest
   RABBIT_PASSWORD: guest
+  KAFKA_BROKER_URI: kafka:9092
 kind: ConfigMap
 metadata:
   name: list-properties

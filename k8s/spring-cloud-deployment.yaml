@@ -33,6 +33,13 @@ spec:
               value: http://loki:3100
             - name: TEMPO_URI
               value: http://tempo:4318/v1/traces
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
           volumeMounts:
             - name: config-volume
               mountPath: /configs
