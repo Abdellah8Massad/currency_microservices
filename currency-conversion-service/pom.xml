@@ -79,10 +79,10 @@
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-exporter-otlp</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-exporter-zipkin</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- Enables tracing of REST API calls made using Feign - V3 ONLY-->
 		<dependency>
 			<groupId>io.github.openfeign</groupId>

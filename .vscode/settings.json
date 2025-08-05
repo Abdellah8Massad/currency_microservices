@@ -1,5 +1,7 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "vscode-git-kafka.workspaceUUID": "m8jjz60t-whj5-wc7f-huwl-kx0000000000",
+    "vscode-git-kafka.sort": "Clicks (High-Low)"
 }

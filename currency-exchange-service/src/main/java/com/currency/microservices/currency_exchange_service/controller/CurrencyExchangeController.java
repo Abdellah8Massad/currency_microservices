@@ -26,11 +26,12 @@ public class CurrencyExchangeController {
     @Autowired
     private CurrencyExchangeRepository currencyExchangeRepository;
 
-    @Autowired
-    private RabbitMQProducer rabbitMQProducer;
+    private final StreamBridge streamBridge;
 
-    public CurrencyExchangeController(CurrencyExchangeRepository currencyExchangeRepository) {
+    public CurrencyExchangeController(CurrencyExchangeRepository currencyExchangeRepository,
+            StreamBridge streamBridge) {
         this.currencyExchangeRepository = currencyExchangeRepository;
+        this.streamBridge = streamBridge;
     }
 
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
@@ -57,8 +58,8 @@ public class CurrencyExchangeController {
     }
 
     private void sendNotification(String message) {
-        rabbitMQProducer.sendMessage("currency-exchange", "routing-key", message);
-        logger.info("Message sent to currency-out-0: {}", message);
+        var result = streamBridge.send("currencyIn-out-0", message);
+        logger.info("Message sent to sendCommunication-out-0: {} (success: {})", message, result);
     }
 
 }
